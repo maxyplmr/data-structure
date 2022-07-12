@@ -5,11 +5,13 @@ interface ILinkedList<Type> {
 
     find(callback: Function): LLNode<Type> | null
 
-    delete(node: LLNode<Type>): void
+    delete(callback: Function): void | Error
+
+    getArray(): Array<Type>
 }
 
 class LinkedList<Type> implements ILinkedList<Type> {
-    private head: LLNode<Type> | null = null
+    public head: LLNode<Type> | null = null
 
     addToBegin(data: Type): LLNode<Type> {
         const node = new LLNode(data)
@@ -48,8 +50,31 @@ class LinkedList<Type> implements ILinkedList<Type> {
         }
     }
 
-    delete(node: LLNode<Type>): void {
-        throw new Error("Method not implemented.")
+    delete(callback: Function): void {
+        const node = this.find(callback)
+        if (!node || !this.head) throw new Error('Node or head is missing')
+        if (!node.prev && !node.next) {
+            this.head = null
+            return
+        }
+        let temp: LLNode<Type> | null = this.head
+        while (temp) {
+            if (`${temp.next?.data}` === `${node.data}`) temp.next = node.next
+            if (`${temp.prev?.data}` === `${node.data}`) temp.prev = node.prev
+            temp = temp.next;
+        }
+        if (!node.prev) this.head = node.next
+    }
+
+    getArray(): Array<Type> {
+        return pushNode(this.head, [])
+
+        function pushNode(node: LLNode<Type> | null, arr: Array<Type>): Array<Type> {
+            if (!node?.data) return arr
+
+            arr.push(node.data)
+            return pushNode(node.next, arr)
+        }
     }
 }
 
