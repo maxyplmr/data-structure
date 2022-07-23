@@ -16,11 +16,23 @@ Fast, random access - impossible.
 
 
 ### Стек / Stack
-Это структура данных, позволяет добавлять или удалять элементы в начале.  
+Это структура данных, позволяет добавлять и удалять элементы в начале.  
 Организован по принципу **LIFO** (Last In First Out, последним пришёл — первым вышел)
 
 It is a data structure that allows you to add or remove elements at the beginning.  
 Organized according to the principle **LIFO**
+
+
+| Поиск / Find | Вставка / Put | Удаление / Delete |
+|--------------|---------------|-------------------|
+| O(n)         | O(1)          | O(1)              |
+
+
+### Очередь / Queue
+Это структура данных, позволяет добавлять элементы в конец очереди и удалять первый элемент.  
+Организован по принципу **FIFO ** (First In First Out, первый пришёл — первый вышел)
+
+It is a data structure  that allows you to add elements to the end of the queue and remove the first element.
 
 
 | Поиск / Find | Вставка / Put | Удаление / Delete |
